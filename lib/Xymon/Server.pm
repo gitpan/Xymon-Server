@@ -4,7 +4,7 @@ use strict;
 BEGIN {
     use Exporter ();
     use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
-    $VERSION     = '0.01';
+    $VERSION     = '0.02';
     @ISA         = qw(Exporter);
     #Give a hoot don't pollute, do not export more than needed by default
     @EXPORT      = qw();
@@ -36,9 +36,9 @@ sub new
 			my $field = shift @fields;
 
 			if( @fields > 1 ) {
-				$self->{hobbitserver}->{$field} = \@fields;
+				$self->{$field} = \@fields;
 			} else {
-				$self->{hobbitserver}->{$field} = $fields[0];
+				$self->{$field} = $fields[0];
 			}
 
 		}
@@ -47,11 +47,6 @@ sub new
     return $self;
 }
 
-sub hobbitserver {
-
-	my $self = shift;
-	return $self->{hobbitserver};
-}
 
 
 #################### main pod documentation begin ###################
@@ -69,7 +64,8 @@ Xymon::Server - Xymon Server Interface
 
   my $server = Xymon::Server->({ HOME => '/home/hobbit/server' });
 
-  print $server->hobbitserver->{BBPORT};
+  print $server->{BBPORT};
+
 
 
 
